@@ -1,0 +1,13 @@
+#/etc/apache2/conf.d/kibana.conf
+
+ProxyPreserveHost On
+ProxyPass /elasticsearch http://<%= @fqdn -%>:9200
+ProxyPassReverse /elasticsearch http://<%= @fqdn -%>:9200
+
+alias /kibana /opt/logstash/vendor/kibana
+
+<Location /elasticsearch>
+    Order allow,deny
+    Allow from all
+</Location>
+

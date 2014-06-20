@@ -1,0 +1,7 @@
+#!/bin/bash
+
+service elasticsearch stop
+service logstash stop
+rm -fr /var/lib/elasticsearch/logstash/*
+service elasticsearch start
+service logstash start
