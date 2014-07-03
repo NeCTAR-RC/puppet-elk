@@ -2,7 +2,6 @@ class elk {
 
   class { 'elasticsearch': }
   class { 'logstash': }
-  class { 'apache::http': }
   class { 'rsyslog::server': }
 
   file { '/etc/rsyslog.d/30-logstash.conf':
@@ -26,6 +25,7 @@ class elk {
 
   file { '/opt/logstash/vendor/':
     ensure => directory,
+    require => Package['logstash'],
   }
 
   file { '/opt/logstash/vendor/kibana/app/dashboards/default.json':
