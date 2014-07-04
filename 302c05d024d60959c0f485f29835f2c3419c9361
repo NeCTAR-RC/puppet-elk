@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAT3//8oQ\u003d",
+        "filename": "manifests/init.pp",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000085
+      },
+      "writtenOn": "2014-07-04T06:18:58Z",
+      "side": 1,
+      "message": "Misaligned",
+      "revId": "302c05d024d60959c0f485f29835f2c3419c9361",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "AAAAT3//8oM\u003d",
+        "filename": "manifests/init.pp",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1000085
+      },
+      "writtenOn": "2014-07-04T06:18:58Z",
+      "side": 0,
+      "message": "Need Apache\u0027s proxy module. So I have apache::http::proxy",
+      "revId": "d21c58398ce4203ea16cbe0a74e48408cc81c6d6",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
