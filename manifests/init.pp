@@ -1,9 +1,21 @@
 class elk {
 
   class { 'elasticsearch': }
+  class { 'curator':
+    provider   => 'pip',
+    manage_pip => true,
+  }
   class { 'logstash': }
-  class { 'apache::http': }
+  class { 'apache::http::proxy': }
   class { 'rsyslog::server': }
+
+  curator::job { 'elasticsearch_cleanup':
+    delete_older   => 90,
+    close_older    => 30,
+    optimize_older => 2,
+    bloom_older    => 2,
+    timeout        => 3600,
+  }
 
   file { '/etc/rsyslog.d/30-logstash.conf':
     source  => 'puppet:///modules/elk/30-logstash.conf',
@@ -25,6 +37,11 @@ class elk {
   }
 
   file { '/opt/logstash/vendor/':
+    ensure  => directory,
+    require => Package['logstash'],
+  }
+
+  file { '/opt/logstash/vendor/kibana/app/dashboards':
     ensure => directory,
   }
 
@@ -36,17 +53,14 @@ class elk {
     require => File['/opt/logstash/vendor/kibana/app/dashboards'],
   }
 
-  file { '/opt/logstash/vendor/kibana/app/dashboards':
-    ensure => directory,
+  file { '/opt/logstash/vendor/kibana/config.js':
+    content => template('elk/kibana-config.js.erb'),
   }
 
   file { '/etc/apache2/conf.d/kibana.conf':
     content => template('elk/apache.conf.erb'),
+    require => Package['apache2'],
     notify  => Service['apache2'],
-  }
-
-  file { '/opt/logstash/vendor/kibana/config.js':
-    content => template('elk/kibana-config.js.erb'),
   }
 
   file { '/usr/local/sbin/reset-elasticsearch.sh':
