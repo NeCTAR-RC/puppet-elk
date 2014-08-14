@@ -1,9 +1,18 @@
-class elk {
+class elk ($es_heap_size='2g') {
 
-  class { 'elasticsearch': }
+  $es_config_hash = {
+    'MAX_LOCKED_MEMORY' => 'unlimited',
+    'ES_HEAP_SIZE'      => $es_heap_size,
+  }
+
+  class { 'elasticsearch':
+    init_defaults => $es_config_hash
+  }
+
   class { 'curator':
     ensure => 'installed',
   }
+
   class { 'logstash': }
   class { 'apache::http::proxy': }
   class { 'rsyslog::server': }
@@ -68,5 +77,9 @@ class elk {
 
   nagios::nrpe::service { 'elasticsearch_tcp':
     check_command => '/usr/lib/nagios/plugins/check_http -H localhost -u /_cluster/health -p 9200 -w 2 -c 3 -s green'
+  }
+
+  file { '/etc/init/logstash-web.conf':
+    ensure => absent,
   }
 }
