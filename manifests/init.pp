@@ -13,7 +13,6 @@ class elk {
     close_older    => 30,
     optimize_older => 2,
     bloom_older    => 2,
-    timeout        => 3600,
   }
 
   file { '/etc/rsyslog.d/30-logstash.conf':

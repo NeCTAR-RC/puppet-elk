@@ -14,3 +14,4 @@ Depends on the following modules and classes
  * puppetlabs-apt >= 1.4.2
  * puppetlabs-stdlib >= 4.1.0
  * NeCTAR-RC/puppet-rsyslog
+ * evenup-curator >= v1.0.1
