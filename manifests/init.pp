@@ -9,20 +9,11 @@ class elk ($es_heap_size='2g') {
     init_defaults => $es_config_hash
   }
 
-  class { 'curator':
-    ensure => 'installed',
-  }
+  include elk::curator
 
   class { 'logstash': }
   class { 'apache::http::proxy': }
   class { 'rsyslog::server': }
-
-  curator::job { 'elasticsearch_cleanup':
-    delete_older   => 90,
-    close_older    => 30,
-    optimize_older => 2,
-    bloom_older    => 2,
-  }
 
   file { '/etc/rsyslog.d/30-logstash.conf':
     source  => 'puppet:///modules/elk/30-logstash.conf',
