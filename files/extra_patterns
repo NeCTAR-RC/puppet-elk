@@ -6,3 +6,4 @@ OPENSTACK <%{POSINT:syslog_pri}>%{TIMESTAMP_ISO8601:timestamp} (%{SYSLOGHOST:log
 F5 <%{POSINT:syslog_pri}>%{TIMESTAMP_ISO8601:timestamp} %{HOST:logsource} ?(%{HOST:api_host}:%{POSINT:api_port})? %{IP:api_ip} %{IPORHOST:clientip} %{USER:ident} %{USER:auth} \[%{HTTPDATE:httptimestamp}\] "(?:%{WORD:verb} %{NOTSPACE:request}(?: HTTP/%{NUMBER:httpversion})?|%{DATA:rawrequest})" %{NUMBER:response} (?:%{NUMBER:bytes}|-) %{QS:referrer} %{QS:agent}
 BROKEN_CGRE <0>%{GREEDYDATA} invld>%{TIMESTAMP_ISO8601:timestamp} (?:%{SYSLOGFACILITY} )?%{SYSLOGHOST:logsource} %{SYSLOGPROG}: %{GREEDYDATA:syslog_message}
 HARDWARE_ERROR <0>%{TIMESTAMP_ISO8601:timestamp} (?:%{SYSLOGFACILITY} )?%{SYSLOGHOST:logsource} %{SYSLOGPROG}: %{GREEDYDATA:syslog_message}
+NETAPP <%{POSINT:syslog_pri}>%{TIMESTAMP_ISO8601:timestamp} %{SYSLOGHOST:logsource} \[%{SYSLOGHOST:hostname}:%{SYSLOGPROG:program}:%{PROG:severity}\]: %{GREEDYDATA:syslog_message}
