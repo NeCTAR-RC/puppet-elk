@@ -19,6 +19,9 @@ class elk ($es_heap_size='2g') {
     source  => 'puppet:///modules/elk/30-logstash.conf',
     notify  => Service['rsyslog'],
     require => File['/etc/rsyslog.d'],
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
   }
 
   apt::pin { 'elasticsearch':
@@ -37,10 +40,17 @@ class elk ($es_heap_size='2g') {
   file { '/opt/logstash/vendor/':
     ensure  => directory,
     require => Package['logstash'],
+    owner   => 'logstash',
+    group   => 'logstash',
+    mode    => '0755',
+
   }
 
   file { '/opt/logstash/vendor/kibana/app/dashboards':
     ensure => directory,
+    owner  => 'logstash',
+    group  => 'logstash',
+    mode   => '0755',
   }
 
   file { '/opt/logstash/vendor/kibana/app/dashboards/default.json':
@@ -53,16 +63,24 @@ class elk ($es_heap_size='2g') {
 
   file { '/opt/logstash/vendor/kibana/config.js':
     content => template('elk/kibana-config.js.erb'),
+    owner   => 'logstash',
+    group   => 'logstash',
+    mode    => '0644',
   }
 
   file { '/etc/apache2/conf.d/kibana.conf':
     content => template('elk/apache.conf.erb'),
     require => Package['apache2'],
     notify  => Service['apache2'],
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
   }
 
   file { '/usr/local/sbin/reset-elasticsearch.sh':
     content => template('elk/reset-elasticsearch.sh.erb'),
+    owner   => 'root',
+    group   => 'root',
     mode    => '0750',
   }
 
