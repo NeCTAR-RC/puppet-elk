@@ -12,7 +12,7 @@ class elk ($es_heap_size='2g') {
   include elk::curator
 
   class { 'logstash': }
-  class { 'apache::http::proxy': }
+  class { 'apacheold::http::proxy': }
   class { 'rsyslog::server': }
 
   file { '/etc/rsyslog.d/30-logstash.conf':
