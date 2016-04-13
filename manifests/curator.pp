@@ -6,8 +6,8 @@ class elk::curator {
     ensure => installed,
   }
 
-  cron { "curator":
-    command => "/usr/bin/curator -l /var/log/curator.log -d 90 -c 30 -b 2",
+  cron { 'curator':
+    command => '/usr/bin/curator -l /var/log/curator.log -d 60 -c 30 -b 2',
     hour    => 22,
     minute  => 10,
   }
