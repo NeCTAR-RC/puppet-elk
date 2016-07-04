@@ -84,6 +84,14 @@ class elk ($es_heap_size='2g') {
     mode    => '0750',
   }
 
+  $admin_hosts = hiera('firewall::admin_hosts', [])
+  $admin_prefixes = [prefix($admin_hosts, '100 elasticsearch,')]
+  nectar::firewall::multisource { $admin_prefixes:
+    action => accept,
+    dport  => 9200,
+    proto  => tcp,
+  }
+
   nagios::nrpe::service { 'elasticsearch_tcp':
     check_command => '/usr/lib/nagios/plugins/check_http -H localhost -u /_cluster/health -p 9200 -w 2 -c 3 -s green'
   }
