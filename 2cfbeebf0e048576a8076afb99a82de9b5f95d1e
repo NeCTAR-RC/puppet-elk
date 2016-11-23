@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7adec928_5393ffa2",
+        "filename": "files/extra_patterns",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000105
+      },
+      "writtenOn": "2016-11-23T03:48:34Z",
+      "side": 1,
+      "message": "ws",
+      "revId": "2cfbeebf0e048576a8076afb99a82de9b5f95d1e",
+      "serverId": "f182a8af-62ca-4ceb-ab81-14f8fec9c6c5",
+      "unresolved": false
+    }
+  ]
+}
