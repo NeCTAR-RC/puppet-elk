@@ -7,3 +7,4 @@ F5 <%{POSINT:syslog_pri}>%{TIMESTAMP_ISO8601:timestamp} %{HOST:logsource} ?(%{HO
 BROKEN_CGRE <0>%{GREEDYDATA} invld>%{TIMESTAMP_ISO8601:timestamp} (?:%{SYSLOGFACILITY} )?%{SYSLOGHOST:logsource} %{SYSLOGPROG}: %{GREEDYDATA:syslog_message}
 HARDWARE_ERROR <0>%{TIMESTAMP_ISO8601:timestamp} (?:%{SYSLOGFACILITY} )?%{SYSLOGHOST:logsource} %{SYSLOGPROG}: %{GREEDYDATA:syslog_message}
 NETAPP <%{POSINT:syslog_pri}>%{TIMESTAMP_ISO8601:timestamp} %{SYSLOGHOST:logsource} \[%{SYSLOGHOST:hostname}:%{SYSLOGPROG:program}:%{PROG:severity}\]: %{GREEDYDATA:syslog_message}
+SWIFTPROXY <%{POSINT:syslog_pri}>%{TIMESTAMP_ISO8601:timestamp} %{HOST:logsource} %{SYSLOGPROG}: %{IPORHOST:clientip} %{IP:api_ip} %{NOTSPACE} ?(%{WORD:verb} %{NOTSPACE:request}(?: HTTP/%{NOTSPACE:httpversion})?|%{DATA:rawrequest}) %{NUMBER:response} (?:%{QS:referrer}|-) %{NOTSPACE:agent} %{NOTSPACE} (?:%{NUMBER:bytes_request}|-) (?:%{NUMBER:bytes}|-) %{NOTSPACE} %{NOTSPACE} %{NOTSPACE} %{GREEDYDATA:syslog_message}
